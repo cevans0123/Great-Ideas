@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Idea</title>
+    <style>
+        body {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        #top {
+            height: 60px;
+        }
+        #top a {
+            display: inline;
+            padding:10px;
+        }
+        #top a:hover {
+            color:tomato;
+        }
+        #top a:hover {
+            color:tomato;
+        }
+        #right {
+            display: inline-block;
+            position: absolute;
+            right: 50px;
+            margin-top: 20px;
+        }
+       
+        h1 {
+            margin: 20px 12px;
+        }
+        #box {
+            width: 50%;
+            height: auto;
+            padding:15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        table {
+            margin-top: 60px;
+        }
+        tr, td {
+            padding: 10px;
+        }
+        input {
+            border: 2px solid;
+            resize: none;
+            height: 50px;
+            width: 250px;
+            font-size: large;
+        }
+        button {
+            height: 30px;
+            width: 80px;
+            background-color:grey;
+            color:white;
+            border-radius: 15px;
+
+        }
+        button a{
+            color:white;
+        }
+        button:hover {
+            border: 2px solid black;
+        }
+        a {
+            font-size: larger;
+            text-decoration: none;
+            color: dodgerblue;
+        }
+        span {
+            font-weight: bold;
+        }
+        .error {
+            color:crimson;
+        }
+    </style>
+</head>
+<body>
+    <div id="top">
+            <div id="right">
+                <a href="/ideas">Back</a>
+            </div>
+    </div>
+    <div id="box">
+        <h1>Edit: {{ idea.content }}</h1>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    <form action="/{{ idea.id }}/update" method="POST">{% csrf_token %}
+        <table>
+                <tr>
+                    <td><span>Content:</span></td>                    
+                    <td><input type="text" name="content" value="{{ idea.content }}"></td>
+                </tr>
+                {% if idea.posted.id == request.session.user_id %}
+                <tr>
+                    <td></td>
+                    <td><button>Update</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button><a href="/{{ idea.id}}/delete">Delete</a></button></td>
+                </tr>
+                {% endif %}   
+            </table>      
+    </form>
+    </div>
+
+    
+</body>
+</html>

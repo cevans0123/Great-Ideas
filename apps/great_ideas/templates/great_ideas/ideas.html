@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Great Ideas</title>
+
+    <style>
+        body {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        #top {
+            height: 60px;
+        }
+        #top h1 {
+            width: auto;
+            display: inline-block;
+            margin: 10px 20px;;
+        }    
+        #top a {
+            font-size: larger;
+            text-decoration: none;
+            color: dodgerblue;
+            display: inline;
+            padding:10px;
+        }
+        #top a:hover {
+            color:tomato;
+        }
+        #right {
+            display: inline-block;
+            position: absolute;
+            right: 50px;
+            margin-top: 20px;
+        }
+        h1 {
+            margin: 40px;
+        }
+        a {
+            font-size: large;
+            text-decoration: none;
+            color: dodgerblue;
+        }
+        a:hover {
+            color:tomato;
+        }
+        h2 {
+            width: auto;
+            display: inline-block;
+            margin: 10px;
+        }
+        #sort {
+            margin-left: 75%;
+        }
+        #sort a{
+            font-size: small;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        #ideas {
+            width: 75%;
+            margin: 80px;
+        }
+        #ideas h2 {
+            display: inline-block;
+        }
+        .button a:hover {
+            color: white;
+                }
+        table {
+            border: 2px solid;
+            width: 100%;
+        }
+        tr, td {
+            padding: 10px;
+            border: 1px solid;
+        }
+        th {
+            padding: 10px;
+            background-color: lightgray;
+        }
+        button {
+            height: 30px;
+            width: 150px;
+            background-color:grey;
+            color:white;
+            margin-top: 30px;
+            border-radius: 15px;
+        }
+        button a{
+            color:white;
+        }
+        button:hover {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="top">
+        <h1>Welcome {{ user.first_name }} {{ user.last_name }}!</h1>       
+            <div id="right">
+                <a href="/logout_user">Logout</a>               
+            </div>
+    </div>
+    <div id="ideas">
+        <h2>Ideas</h2>
+        <div id="sort">
+            <a href="">Low Likes</a>
+            <a href="">High Likes</a>
+        </div>
+        <table> 
+            <tr>
+                <th>Ideas</th>
+                <th>Created By:</th>
+                <th>Likes</th>
+                <th>Action</th>
+            </tr>
+            {% for idea in ideas %}
+            <tr>
+                <td><a href="/{{ idea.id }}">{{ idea.content }}</a></td>
+                <td>{{ idea.posted.first_name }} {{ idea.posted.last_name }}</td>
+                <td>{{ idea.likes.count }}</td>
+                <td><a href="/{{ idea.id }}/like">Like</a>
+                    
+                <!-- {% if idea.likes == True %}
+                | <a href="/{{ idea.id }}/unlike">Unlike</a>
+                {% endif %}     -->
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button class="button"><a href="/new">Create an Idea</a></button>
+    </div>
+    
+</body>
+</html>

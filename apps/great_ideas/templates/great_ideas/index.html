@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Handy Helper</title>
+
+    <style>
+        body {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        h1 {
+            margin: 50px 0px 5px 160px;
+        }
+        div {
+            padding: 10px 20px;
+            width: 400px;
+            border: 2px solid darkgrey;        }
+        #reg {
+            display: inline-block;
+            margin: 40px 10px 0px 160px;
+        }
+        #log {
+            display: inline-block;
+            vertical-align: top;
+            margin: 40px 10px 0px 40px;
+        }
+        #reg h1 {
+            margin: 10px auto;
+        }
+        #log h1 {
+            margin: 10px auto;
+        }
+        input {
+           height: 20px;
+        }
+        td {
+            padding: 10px 0px;
+        }
+        button {
+            height: 30px;
+            width: 80px;
+            background-color:cornflowerblue;
+            font-size: medium;
+            margin: 10px 0px;
+        }
+        button:hover {
+            border: 2px solid black;
+        }
+        .error {
+            color:crimson;
+            margin-left: 275px;
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>Great Ideas</h1>
+    <div id="reg">
+            <form action="/create" name="login" method="POST">{% csrf_token %}
+                <h1>Registration:</h1>
+                <table>
+                    <tr>
+                        <td>First Name:</td>
+                        <td><input class="fields" type="text" name="first_name"></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td><input class="fields" type="text" name="last_name"></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input class="fields" type="email" name="email"></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input class="fields" type="password" name="password"></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm PW:</td>
+                        <td><input class="fields" type="password" name="pw_confirm"></td>
+                    </tr>
+                </table>
+                <button>Register:</button>
+            </form>
+        </div>
+    <div id="log">
+        <form action="/login" name="login" method="POST">{% csrf_token %}
+            <h1>Login:</h1>
+            <table>
+                <tr>
+                    <td>Email:</td>
+                    <td><input class="fields" type="text" name="log_email"></td>                    
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input class="fields" type="password" name="log_password"></td>
+                </tr>
+            </table>
+            <button>Login:</button>
+        </form>
+    </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create an idea</title>
+    <style>
+        body {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        #top {
+            height: 60px;
+        }
+        #top h1 {
+            width: 500px;
+            display: inline-block;
+            margin: 10px;
+        }    
+        #top h3, a {
+            display: inline;
+            padding:10px;
+        }
+        #right {
+            display: inline-block;
+            position: absolute;
+            right: 50px;
+            margin-top: 20px;
+        }
+        #top button {
+            width: 60px;
+            height: 25px;
+            background-color: cornflowerblue;
+            color: white;
+            vertical-align: text-bottom;
+        }
+        #box {
+            width: 400px;
+            height: 450px;
+            padding:15px;
+            margin:40px;
+            border: 3px solid darkgray;
+        }
+        table {
+            margin-top: 60px;
+        }
+        tr, td {
+            padding: 10px;
+            vertical-align: top;
+
+        }
+        input {
+            height: 20px;
+            border: 2px solid;
+        }
+        textarea {
+            border: 2px solid;
+            resize: none;
+            height: 100px;
+            width: 200px;
+        }
+        button {
+            height: 30px;
+            width: 80px;
+            background-color:grey;
+            color:white;
+            border-radius: 15px;
+
+        }
+        button:hover {
+            border: 2px solid black;
+        }
+        a {
+            font-size: larger;
+            text-decoration: none;
+            color: dodgerblue;
+        }
+        a:hover {
+            color:tomato;
+        }
+        span {
+            font-weight: bold;
+        }
+        .error {
+            color:crimson;
+        }
+    </style>
+</head>
+<body>
+    <div id="top">
+            <div id="right">
+                <a href="/ideas">Back</a>
+            </div>
+    </div>
+    <div id="box">
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="/add" method="POST">{% csrf_token %}
+            <h1>Create a new idea</h1>
+            <table>
+                <tr>
+                    <td>Content:</td>
+                    <td><input type="text" id="content" name="content" ></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button>Create</button></td>
+                </tr>
+            </table>      
+        </form>
+    </div>
+
+    
+</body>
+</html>
